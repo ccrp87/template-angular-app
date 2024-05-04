@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SeguridadModule } from './modulos/seguridad/seguridad.module';
+import { HasPermissionDirective } from './core/directives/haspermission/has-permission.directive';
 
 const routes: Routes = [
   {
-    path:"seguridad",loadChildren: ()=> import('./modulos/seguridad/seguridad.module').then((m)=>m.SeguridadModule)
+    path:"seguridad",loadChildren: ()=> import('./modulos/seguridad/seguridad-routing.module').then((m)=>m.SeguridadRoutingModule)
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), SeguridadModule],
+  declarations:[],
+  imports: [RouterModule.forRoot(routes),],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

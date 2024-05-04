@@ -8,6 +8,6 @@ import { HasPermissionDirective } from './directives/haspermission/has-permissio
   declarations: [HasPermissionDirective],
   imports: [
     CommonModule
-  ],exports:[]
+  ],exports:[HasPermissionDirective]
 })
 export class CoreModule { }

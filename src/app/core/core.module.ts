@@ -1,13 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HasPermissionDirective } from './directives/haspermission/has-permission.directive';
-
-
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { LoadingComponent } from "./componentes/loading/loading.component";
+import { LoadingService } from "./services/loading/loading.service";
 
 @NgModule({
-  declarations: [HasPermissionDirective],
-  imports: [
-    CommonModule
-  ],exports:[HasPermissionDirective]
+  declarations: [LoadingComponent],
+  imports: [CommonModule],
+  exports: [LoadingComponent]
 })
-export class CoreModule { }
+export class CoreModule {}

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SeguridadModule } from './modulos/seguridad/seguridad.module';
-import { HasPermissionDirective } from './core/directives/haspermission/has-permission.directive';
+import { HasPermissionDirective } from './modulos/seguridad/directives/haspermission/has-permission.directive';
 
 const routes: Routes = [
   {

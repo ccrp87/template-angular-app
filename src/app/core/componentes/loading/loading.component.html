@@ -1,3 +1,5 @@
 @if (loading) {
-<p style="background-color: blue;">loading works!</p>
+<div class="loading-background" [@fade]="loading">
+    <div class="loader"></div>
+</div>
 }

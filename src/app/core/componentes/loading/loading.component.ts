@@ -1,11 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { LoadingService } from "../../services/loading/loading.service";
 import { delay } from "rxjs";
+import { animate, style, transition, trigger } from "@angular/animations";
 
 @Component({
   selector: "app-loading",
   templateUrl: "./loading.component.html",
-  styleUrl: "./loading.component.css"
+  styleUrl: "./loading.component.css",
+  animations: [trigger("fade", [transition("void => *", [style({ opacity: 0 }), animate(500, style({ opacity: 1 }))])])]
 })
 export class LoadingComponent implements OnInit {
   loading: boolean = false;

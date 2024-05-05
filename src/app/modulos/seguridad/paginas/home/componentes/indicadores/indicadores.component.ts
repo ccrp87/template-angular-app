@@ -9,8 +9,8 @@ import { Component } from "@angular/core";
 export class IndicadoresComponent {
   constructor(private http: HttpClient) {}
   request() {
-    for (let index = 0; index < 10; index++) {
-      this.http.get(`https://dummyapi.io/data/v1/user?limit=10`).subscribe(data => {});
+    for (let index = 0; index < 100; index++) {
+      this.http.get(`https://dummyjson.com/productsd`).subscribe(data => {});
     }
   }
 }

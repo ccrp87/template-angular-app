@@ -22,16 +22,17 @@ export class LoadingService {
    * @param loading {boolean}
    * @param url {string}
    */
-  setLoading(loading: boolean, url: string): void {
-    if (!url) {
+  setLoading(loading: boolean, transactionId: string): void {
+    if (!transactionId) {
       throw new Error("The request URL must be provided to the LoadingService.setLoading function");
     }
     if (loading === true) {
-      this.loadingMap.set(url, loading);
+      this.loadingMap.set(transactionId, loading);
       this.loadingSub.next(true);
-    } else if (loading === false && this.loadingMap.has(url)) {
-      this.loadingMap.delete(url);
+    } else if (loading === false && this.loadingMap.has(transactionId)) {
+      this.loadingMap.delete(transactionId);
     }
+    console.log(this.loadingMap.size);
     if (this.loadingMap.size === 0) {
       this.loadingSub.next(false);
     }

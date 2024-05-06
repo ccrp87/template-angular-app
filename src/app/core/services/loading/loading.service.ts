@@ -32,7 +32,6 @@ export class LoadingService {
     } else if (loading === false && this.loadingMap.has(transactionId)) {
       this.loadingMap.delete(transactionId);
     }
-    console.log(this.loadingMap.size);
     if (this.loadingMap.size === 0) {
       this.loadingSub.next(false);
     }

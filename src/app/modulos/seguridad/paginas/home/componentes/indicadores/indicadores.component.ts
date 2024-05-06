@@ -10,7 +10,7 @@ export class IndicadoresComponent {
   constructor(private http: HttpClient) {}
   request() {
     for (let index = 0; index < 10; index++) {
-      this.http.get(`https://dummyjson.com/productsd`).subscribe(data => {});
+      this.http.get(`https://dummyjson.com/products`).subscribe(data => {});
     }
   }
 }

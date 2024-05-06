@@ -1,0 +1,12 @@
+.app-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.app-sidebar {
+    flex: 1;
+}
+
+.router-outlet{
+    flex: 5;
+}

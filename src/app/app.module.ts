@@ -8,14 +8,11 @@ import { HttpClientModule, provideHttpClient, withInterceptors } from "@angular/
 import { httpRequestAuthorizationInterceptor } from "./core/interceptors/http-request-authorization.interceptor";
 import { httpRequestLoadingInterceptor } from "./core/interceptors/http-request-loading.interceptor";
 import { BrowserModule } from "@angular/platform-browser";
-import { BrowserAnimationsModule, provideAnimations } from "@angular/platform-browser/animations";
+
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, SeguridadModule, CoreModule, HttpClientModule, BrowserAnimationsModule],
-  providers: [
-    provideHttpClient(withInterceptors([httpRequestAuthorizationInterceptor, httpRequestLoadingInterceptor])),
-    provideAnimations()
-  ],
+  imports: [BrowserModule, AppRoutingModule, SeguridadModule, CoreModule, HttpClientModule],
+  providers: [provideHttpClient(withInterceptors([httpRequestAuthorizationInterceptor, httpRequestLoadingInterceptor]))],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

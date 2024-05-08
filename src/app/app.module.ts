@@ -8,10 +8,12 @@ import { HttpClientModule, provideHttpClient, withInterceptors } from "@angular/
 import { httpRequestAuthorizationInterceptor } from "./core/interceptors/http-request-authorization.interceptor";
 import { httpRequestLoadingInterceptor } from "./core/interceptors/http-request-loading.interceptor";
 import { BrowserModule } from "@angular/platform-browser";
+import { SharedModule } from "./shared/shared/shared.module";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, SeguridadModule, CoreModule, HttpClientModule],
+  imports: [BrowserModule,FormsModule,ReactiveFormsModule , AppRoutingModule, SeguridadModule, CoreModule, HttpClientModule,SharedModule],
   providers: [provideHttpClient(withInterceptors([httpRequestAuthorizationInterceptor, httpRequestLoadingInterceptor]))],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
+import { AppStore } from '../../../../core/store/app.store';
 
 @Component({
   selector: 'app-home',
@@ -7,5 +8,14 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-
+  readonly store = inject(AppStore);
+  public data:any
+  constructor(){
+    effect(()=>{
+      this.data = this.store.sessionUser.DisplayName()
+    })
+  }
+  readStore(){
+    console.log(this.store.sessionUser.DisplayName());
+  }
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ProductoService } from '../../producto.service';
+import { AppStore } from '../../../../../../core/store/app.store';
 
 @Component({
   selector: 'app-indicadores',
@@ -9,13 +10,12 @@ import { ProductoService } from '../../producto.service';
 })
 export class IndicadoresComponent {
   public products: any[] = [];
-
-  constructor(private productService: ProductoService) {}
+  readonly store = inject(AppStore);
+  constructor(private productService: ProductoService) {
+  } 
   request() {
-    for (let index = 0; index < 1; index++) {
-      this.productService.getAllProducts().subscribe((data:any) => {
-          this.products = data.products
-      });
-    }
+
+    this.store.updateSessionUser({DisplayName:Date.now().toPrecision().toString(),Email:"",jwt:"",UserName:""})
+    
   }
 }

@@ -5,3 +5,9 @@
 
 html, body { height: 100vh; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.blue-snackbar{
+    background: rgb(148, 148, 148) !important ;
+    height: 200px;
+    color: red;
+}

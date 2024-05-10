@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, effect, inject } from '@angular/core';
+import { AppStore } from '../../store/app.store';
 
 @Component({
   selector: 'app-navbar',
@@ -7,10 +7,13 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit {
+  readonly store = inject(AppStore);
 
   public visible:boolean = true;
   constructor(){
-
+    effect(()=>{
+      this.visible = this.store.loginUser();
+     });
   }
 
   ngOnInit(): void {

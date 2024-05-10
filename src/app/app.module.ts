@@ -10,11 +10,13 @@ import { httpRequestLoadingInterceptor } from "./core/interceptors/http-request-
 import { BrowserModule } from "@angular/platform-browser";
 import { SharedModule } from "./shared/shared/shared.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { httpRequestHandlerErrorsInterceptor } from "./core/interceptors/http-request-handler-api-errors.interceptor";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule,FormsModule,ReactiveFormsModule , AppRoutingModule, SeguridadModule, CoreModule, HttpClientModule,SharedModule],
-  providers: [provideHttpClient(withInterceptors([httpRequestAuthorizationInterceptor, httpRequestLoadingInterceptor]))],
+  imports: [BrowserModule,FormsModule,ReactiveFormsModule , AppRoutingModule, SeguridadModule, CoreModule, HttpClientModule,SharedModule,BrowserAnimationsModule],
+  providers: [provideHttpClient(withInterceptors([httpRequestAuthorizationInterceptor, httpRequestLoadingInterceptor,httpRequestHandlerErrorsInterceptor]))],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

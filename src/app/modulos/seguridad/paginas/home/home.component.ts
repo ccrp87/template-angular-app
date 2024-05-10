@@ -8,14 +8,6 @@ import { AppStore } from '../../../../core/store/app.store';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  readonly store = inject(AppStore);
-  public data:any
-  constructor(){
-    effect(()=>{
-      this.data = this.store.sessionUser.DisplayName()
-    })
-  }
-  readStore(){
-    console.log(this.store.sessionUser.DisplayName());
-  }
+
+
 }

@@ -1,26 +1,33 @@
 import { patchState, signalStore, withHooks, withMethods, withState } from '@ngrx/signals';
-import { UserSession } from '../../modulos/seguridad/modelos/seguridad.model';
+import { SeguridadService } from '../../modulos/seguridad/servicios/seguridad.service';
+import { inject } from '@angular/core';
 
 
- type AppState = {
-    sessionUser:UserSession;
-    loading: boolean,
-}
+
+type AppState = {
+  loginUser: boolean;
+  loading: boolean;
+};
 const initialState: AppState = {
-        sessionUser:{
-            DisplayName:"",
-            Email:"",
-            jwt:"",
-            UserName:""
-        },
-        loading:false
-  };
+  loginUser: false,
+  loading: false,
+};
 export const AppStore = signalStore(
-    { providedIn: 'root' },
-    withState(initialState),
-    withMethods((store) => ({
-        updateSessionUser(userSession:UserSession):void{            
-            patchState(store,(state)=>({sessionUser:userSession}))
-        }
-    }),
-));
+  { providedIn: 'root' },
+  withState(initialState),
+  withMethods((store) => ({
+    startSessionUser(status: boolean) {
+      patchState(store, (state) => ({ loginUser: status }));
+    },
+  }),),
+  withHooks({
+    onInit(store) {
+ const seguridadService = inject(SeguridadService);
+
+      store.startSessionUser(seguridadService.hasSessionActive());
+    },
+    onDestroy(store) {
+     
+    },
+  }),
+);

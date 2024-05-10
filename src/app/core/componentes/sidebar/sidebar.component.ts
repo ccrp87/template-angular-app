@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRouteSnapshot } from '@angular/router';
+import { Component, OnInit, effect, inject } from '@angular/core';
+import { AppStore } from '../../store/app.store';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,8 +8,13 @@ import { ActivatedRouteSnapshot } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
   public visible: boolean = true;
+  readonly store = inject(AppStore);
 
-  constructor(private activateRoute: ActivatedRouteSnapshot) {}
+  constructor() {
+    effect(()=>{
+     this.visible = this.store.loginUser();
+    });
+  }
 
   ngOnInit(): void {
     if (window.location.href.includes('seguridad/login')) {

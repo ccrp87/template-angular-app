@@ -2,7 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as enviroment from '../../../../assets/enviroment.json';
-import { RequestLoginUser, ResponseLoginUser } from '../modelos/seguridad.model';
+import {
+  RequestLoginUser,
+  ResponseLoginUser,
+} from '../modelos/seguridad.model';
 import { Observable } from 'rxjs';
 import { ResponseAPI } from '../../../core/models/app/app.model';
 
@@ -12,8 +15,21 @@ import { ResponseAPI } from '../../../core/models/app/app.model';
 export class SeguridadService {
   constructor(private route: Router, private http: HttpClient) {}
 
-  loginUser(loginUser:RequestLoginUser): Observable<ResponseAPI<ResponseLoginUser>> {
-    return this.http.post<ResponseAPI<ResponseLoginUser>>(`${enviroment.apiAuthUrl}Auth/Login`, loginUser);
+  loginUser(
+    loginUser: RequestLoginUser
+  ): Observable<ResponseAPI<ResponseLoginUser>> {
+    return this.http.post<ResponseAPI<ResponseLoginUser>>(
+      `${enviroment.apiAuthUrl}Auth/Login`,
+      loginUser
+    );
+  }
+
+  hasSessionActive(): boolean {
+    let token: string = localStorage.getItem('token') ?? '';
+    if (token.split('.').length == 3) {
+      return true;
+    }
+    return false;
   }
 
   /**

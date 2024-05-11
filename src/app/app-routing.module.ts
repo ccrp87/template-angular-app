@@ -5,13 +5,24 @@ import { HasPermissionDirective } from './modulos/seguridad/directives/haspermis
 
 const routes: Routes = [
   {
-    path:"seguridad",loadChildren: ()=> import('./modulos/seguridad/seguridad-routing.module').then((m)=>m.SeguridadRoutingModule)
-  }
+    path: 'seguridad',
+    loadChildren: () =>
+      import('./modulos/seguridad/seguridad-routing.module').then(
+        (m) => m.SeguridadRoutingModule
+      ),
+  },
+  {
+    path: 'seguimientocomercial',
+    loadChildren: () =>
+      import(
+        './modulos/seguimiento-comercial/seguimiento-comercial-routing.module'
+      ).then((m) => m.SeguridadRoutingModule),
+  },
 ];
 
 @NgModule({
-  declarations:[],
-  imports: [RouterModule.forRoot(routes),],
-  exports: [RouterModule]
+  declarations: [],
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

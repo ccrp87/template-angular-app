@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -12,11 +12,13 @@ import { SharedModule } from "./shared/shared/shared.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { httpRequestHandlerErrorsInterceptor } from "./core/interceptors/http-request-handler-api-errors.interceptor";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { SeguimientoComercialModule } from "./modulos/seguimiento-comercial/seguimiento-comercial.module";
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule,FormsModule,ReactiveFormsModule , AppRoutingModule, SeguridadModule, CoreModule, HttpClientModule,SharedModule,BrowserAnimationsModule],
+  imports: [BrowserModule,FormsModule,ReactiveFormsModule , AppRoutingModule, SeguridadModule, CoreModule, HttpClientModule,SharedModule,BrowserAnimationsModule,SeguimientoComercialModule],
   providers: [provideHttpClient(withInterceptors([httpRequestAuthorizationInterceptor, httpRequestLoadingInterceptor,httpRequestHandlerErrorsInterceptor]))],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

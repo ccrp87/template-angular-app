@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import * as enviroment from '../../../../assets/enviroment.json';
+import * as enviroment from '../../../../assets/enviroments/enviroment.json';
 import {
   RequestLoginUser,
   ResponseLoginUser,

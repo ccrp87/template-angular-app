@@ -8,8 +8,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
 
-  :root {
-  --building-color: #FF9800;
+:root {
+  --bookmark-color: #FF9800;
   --house-color: #0288D1;
   --shop-color: #7B1FA2;
   --warehouse-color: #558B2F;
@@ -38,7 +38,6 @@ body {
  * Property styles in unhighlighted state.
  */
 .property {
-  align-items: center;
   background-color: #FFFFFF;
   border-radius: 50%;
   color: #263238;
@@ -89,7 +88,7 @@ body {
 
 .property .address {
   color: #9E9E9E;
-  font-size: 10px;
+  font-size: 12px;
   margin-bottom: 10px;
   margin-top: 5px;
 }
@@ -119,11 +118,24 @@ body {
   background-color: #FFFFFF;
   border-radius: 8px;
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
-  height: 80px;
-  padding: 8px 15px;
-  width: auto;
+  min-height: 155px;
+  padding: 15px 15px;
+  width: 400px;
+  word-break: break-all;
+  overflow-y: auto;
+
 }
 
+.number-icon{
+    position: absolute;
+    color: black;
+    font-size: 15px;
+    text-shadow: 1px 0px 3px;
+}
+.property.highlight .number-icon{
+  top: 100px;
+  color: #94999b;
+}
 .property.highlight::after {
   border-top: 9px solid #FFFFFF;
 }
@@ -165,18 +177,18 @@ body {
 }
 
 /*
- * Building icon colors.
+ * bookmark icon colors.
  */
-.property.highlight:has(.fa-building) .icon {
-  color: var(--building-color);
+.property.highlight:has(.fa-bookmark) .icon {
+  color: var(--bookmark-color);
 }
 
-.property:not(.highlight):has(.fa-building) {
-  background-color: var(--building-color);
+.property:not(.highlight):has(.fa-bookmark) {
+  background-color: var(--bookmark-color);
 }
 
-.property:not(.highlight):has(.fa-building)::after {
-  border-top: 9px solid var(--building-color);
+.property:not(.highlight):has(.fa-bookmark)::after {
+  border-top: 9px solid var(--bookmark-color);
 }
 
 /*

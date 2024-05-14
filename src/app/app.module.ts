@@ -9,16 +9,32 @@ import { httpRequestAuthorizationInterceptor } from "./core/interceptors/http-re
 import { httpRequestLoadingInterceptor } from "./core/interceptors/http-request-loading.interceptor";
 import { BrowserModule } from "@angular/platform-browser";
 import { SharedModule } from "./shared/shared/shared.module";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { httpRequestHandlerErrorsInterceptor } from "./core/interceptors/http-request-handler-api-errors.interceptor";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { SeguimientoComercialModule } from "./modulos/seguimiento-comercial/seguimiento-comercial.module";
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule,FormsModule,ReactiveFormsModule , AppRoutingModule, SeguridadModule, CoreModule, HttpClientModule,SharedModule,BrowserAnimationsModule,SeguimientoComercialModule],
-  providers: [provideHttpClient(withInterceptors([httpRequestAuthorizationInterceptor, httpRequestLoadingInterceptor,httpRequestHandlerErrorsInterceptor]))],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    SeguridadModule,
+    CoreModule,
+    HttpClientModule,
+    SharedModule,
+    BrowserAnimationsModule,
+    SeguimientoComercialModule
+  ],
+  providers: [
+    provideHttpClient(
+      withInterceptors([
+        httpRequestAuthorizationInterceptor,
+        httpRequestLoadingInterceptor,
+        httpRequestHandlerErrorsInterceptor
+      ])
+    )
+  ],
   bootstrap: [AppComponent],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

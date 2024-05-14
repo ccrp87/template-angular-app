@@ -1,26 +1,31 @@
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
-import { ChangeDetectorRef } from "@angular/core";
-import { map } from "rxjs";
+import { SeguimientoTatService } from "../../servicios/seguimiento-tat.service";
+import { SelectModel } from "../../../../core/models/app/select.model";
+import { SeguimientoVendedorModel } from "../../modelos/SeguimientoVendedor.model";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-seguimiento-tat",
   templateUrl: "./seguimiento-tat.component.html",
   styleUrl: "./seguimiento-tat.component.css"
 })
-export class SeguimientoTATComponent implements AfterViewInit, OnInit {
+export class SeguimientoTATComponent implements AfterViewInit {
   AdvancedMarkerElement: any;
+  displayedColumns: string[] = ["fecha", "cliente", "novedad", "tipo", "latitud", "longitud"];
 
-  constructor(private elementRef: ElementRef) {}
-  async ngOnInit(): Promise<void> {}
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  public seguimientosVendedor = new MatTableDataSource<SeguimientoVendedorModel>([]);
+
+  constructor(private seguimientoService: SeguimientoTatService, private snackBar: MatSnackBar) {}
+
   /**Maps */
-  get testEl() {
-    return document.querySelector(".property");
-  }
-  center: google.maps.LatLngLiteral = { lat: 24, lng: 12 };
-  zoom = 4;
-  vertices: google.maps.LatLngLiteral[] = [{ lat: 13, lng: 13 }, { lat: -13, lng: 0 }, { lat: 13, lng: -13 }];
+
+  center: google.maps.LatLngLiteral = { lat: 11.008748, lng: -74.835449 };
+  zoom = 12.43;
+  vertices: google.maps.LatLngLiteral[] = [];
 
   polylineOptions: google.maps.PolylineOptions = {
     path: this.vertices,
@@ -29,56 +34,13 @@ export class SeguimientoTATComponent implements AfterViewInit, OnInit {
     strokeWeight: 2
   };
 
-  public properties: any = [
-    {
-      address: "215 Emily St, MountainView, CA",
-      description: "Single family house with modern design",
-      price: "$ 3,889,000",
-      type: "home",
-      bed: 5,
-      bath: 4.5,
-      size: 300,
-      class: "property",
-      position: {
-        lat: parseFloat("13"),
-        lng: parseFloat("13"),
-        altitude: 3
-      }
-    },
-    {
-      address: "108 Squirrel Ln &#128063;, Menlo Park, CA",
-      description: "Townhouse with friendly neighbors",
-      price: "$ 3,050,000",
-      type: "building",
-      bed: 4,
-      bath: 3,
-      size: 200,
-      class: "property",
-      position: {
-        lat: -13,
-        lng: 0
-      }
-    },
-    {
-      address: "100 Chris St, Portola Valley, CA",
-      description: "Spacious warehouse great for small business",
-      price: "$ 3,125,000",
-      type: "warehouse",
-      bed: 4,
-      bath: 4,
-      size: 800,
-      class: "property highlight",
-      position: {
-        lat: 13,
-        lng: -13
-      }
-    }
-  ];
+  public properties: SeguimientoVendedorModel[] = [];
   handleDomChange(event: any) {
     console.log(event);
   }
 
   toggleHighlight(markerView: any) {
+    console.log(this.properties[markerView]);
     if (this.properties[markerView].class.includes("highlight")) {
       this.properties[markerView].class = this.properties[markerView].class.replace("highlight", "");
       // markerView.zIndex = null;
@@ -87,36 +49,36 @@ export class SeguimientoTATComponent implements AfterViewInit, OnInit {
       // markerView.zIndex = 1;
     }
     // this.ref.detectChanges();
-
-    console.log(this.properties[markerView]);
   }
 
-  buildContent(property: any) {
+  buildContent(marker: SeguimientoVendedorModel, order: number) {
     const content = document.createElement("div");
 
     content.innerHTML = `
-    <div class="property ${property.class}" >
-    <div class="icon" ><i aria-hidden="true" class="fa fa-icon fa-${property.type}" title="${property.type}"></i>
-        <span class="fa-sr-only">${property.type}</span>
+    <div class="property ${marker.class}" >
+
+    <div class="icon" ><i aria-hidden="true" class="fa fa-${marker.type}" title="${marker.type}"></i>
+      
+        <span class="number-icon">${order}</span>
     </div>
     <div class="details">
-        <div class="price">${property.price}</div>
-        <div class="address">${property.address}</div>
+        <div class="price">${marker.cliente}</div>
+        <div class="address">${marker.novedad}</div>
         <div class="features">
         <div>
-            <i aria-hidden="true" class="fa fa-bed fa-lg bed" title="bedroom"></i>
-            <span class="fa-sr-only">bedroom</span>
-            <span>${property.bed}</span>
+            <i aria-hidden="true" class="fa-regular fa-clock fa-lg clock" title="bedroom">1</i>
+            <span class="fa-sr-only">clock</span>
+            <span>${marker.fecha}</span>
         </div>
         <div>
             <i aria-hidden="true" class="fa fa-bath fa-lg bath" title="bathroom"></i>
             <span class="fa-sr-only">bathroom</span>
-            <span>${property.bath}</span>
+            <span></span>
         </div>
         <div>
             <i aria-hidden="true" class="fa fa-ruler fa-lg size" title="size"></i>
             <span class="fa-sr-only">size</span>
-            <span>${property.size} ft<sup>2</sup></span>
+            <span><sup>2</sup></span>
         </div>
         </div>
     </div>
@@ -126,43 +88,30 @@ export class SeguimientoTATComponent implements AfterViewInit, OnInit {
   }
 
   /**Maps end */
+  obtenerSeguientoVendedor(data: any) {
+    if (data.vendedor == "") {
+      this.snackBar.open("Seleccione un vendedor.", "", {
+        verticalPosition: "bottom",
+        horizontalPosition: "right",
+        duration: 3000
+      });
+      return;
+    }
 
-  displayedColumns: string[] = ["position", "name", "weight", "symbol"];
+    this.seguimientoService.obtenerSeguimientoVendedor(data.fechaCorte, data.vendedor).subscribe(seguimientos => {
+      this.seguimientosVendedor = new MatTableDataSource<SeguimientoVendedorModel>(seguimientos);
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+      this.vertices = seguimientos.map(seguimiento => ({ lat: seguimiento.latitud, lng: seguimiento.longitud }));
+      this.properties = seguimientos.map(seguimiento => {
+        seguimiento.position = { lat: seguimiento.latitud, lng: seguimiento.longitud };
+        seguimiento.class = "";
+        seguimiento.type = seguimiento.tipo == "Visita" ? "bookmark" : "home";
+        return seguimiento;
+      });
+    });
+  }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    this.seguimientosVendedor.paginator = this.paginator;
   }
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: "Hydrogen", weight: 1.0079, symbol: "H" },
-  { position: 2, name: "Helium", weight: 4.0026, symbol: "He" },
-  { position: 3, name: "Lithium", weight: 6.941, symbol: "Li" },
-  { position: 4, name: "Beryllium", weight: 9.0122, symbol: "Be" },
-  { position: 5, name: "Boron", weight: 10.811, symbol: "B" },
-  { position: 6, name: "Carbon", weight: 12.0107, symbol: "C" },
-  { position: 7, name: "Nitrogen", weight: 14.0067, symbol: "N" },
-  { position: 8, name: "Oxygen", weight: 15.9994, symbol: "O" },
-  { position: 9, name: "Fluorine", weight: 18.9984, symbol: "F" },
-  { position: 10, name: "Neon", weight: 20.1797, symbol: "Ne" },
-  { position: 11, name: "Sodium", weight: 22.9897, symbol: "Na" },
-  { position: 12, name: "Magnesium", weight: 24.305, symbol: "Mg" },
-  { position: 13, name: "Aluminum", weight: 26.9815, symbol: "Al" },
-  { position: 14, name: "Silicon", weight: 28.0855, symbol: "Si" },
-  { position: 15, name: "Phosphorus", weight: 30.9738, symbol: "P" },
-  { position: 16, name: "Sulfur", weight: 32.065, symbol: "S" },
-  { position: 17, name: "Chlorine", weight: 35.453, symbol: "Cl" },
-  { position: 18, name: "Argon", weight: 39.948, symbol: "Ar" },
-  { position: 19, name: "Potassium", weight: 39.0983, symbol: "K" },
-  { position: 20, name: "Calcium", weight: 40.078, symbol: "Ca" }
-];
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
 }

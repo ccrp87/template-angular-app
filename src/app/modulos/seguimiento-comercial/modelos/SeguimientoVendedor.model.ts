@@ -8,8 +8,8 @@ export class SeguimientoVendedorModel {
   valor: number = 0;
   extraruta: string = "";
   //tipo: string = "";
-  longitud: number = 0;
-  latitud: number = 0;
+  longitud: string = "";
+  latitud: string = "";
   recaudo: number = 0;
   observacion: string = "";
   class: string = "";

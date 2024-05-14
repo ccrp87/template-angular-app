@@ -101,9 +101,9 @@ export class SeguimientoTATComponent implements AfterViewInit {
     this.seguimientoService.obtenerSeguimientoVendedor(data.fechaCorte, data.vendedor).subscribe(seguimientos => {
       this.seguimientosVendedor = new MatTableDataSource<SeguimientoVendedorModel>(seguimientos);
 
-      this.vertices = seguimientos.map(seguimiento => ({ lat: seguimiento.latitud, lng: seguimiento.longitud }));
+      this.vertices = seguimientos.map(seguimiento => ({ lat: Number.parseFloat(seguimiento.latitud), lng: Number.parseFloat(seguimiento.longitud) }));
       this.properties = seguimientos.map(seguimiento => {
-        seguimiento.position = { lat: seguimiento.latitud, lng: seguimiento.longitud };
+        seguimiento.position = { lat: Number.parseFloat(seguimiento.latitud), lng: Number.parseFloat(seguimiento.longitud) };
         seguimiento.class = "";
         seguimiento.type = seguimiento.tipo == "Visita" ? "bookmark" : "home";
         return seguimiento;

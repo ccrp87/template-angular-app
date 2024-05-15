@@ -8,7 +8,7 @@ import { HttpClientModule, provideHttpClient, withInterceptors } from "@angular/
 import { httpRequestAuthorizationInterceptor } from "./core/interceptors/http-request-authorization.interceptor";
 import { httpRequestLoadingInterceptor } from "./core/interceptors/http-request-loading.interceptor";
 import { BrowserModule } from "@angular/platform-browser";
-import { SharedModule } from "./shared/shared/shared.module";
+import { SharedModule } from "./shared/shared.module";
 import { httpRequestHandlerErrorsInterceptor } from "./core/interceptors/http-request-handler-api-errors.interceptor";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { SeguimientoComercialModule } from "./modulos/seguimiento-comercial/seguimiento-comercial.module";

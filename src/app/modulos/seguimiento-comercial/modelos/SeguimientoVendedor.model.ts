@@ -1,19 +1,20 @@
 export class SeguimientoVendedorModel {
+  numeroOrden:string="";
   fecha: string = "";
-  cliente: string = "";
+  nombreCliente: string = "";
+  codigoCliente:string=""
   vendedor: string = "";
   novedad: string = "";
   documento: string = "";
   duracion: number = 0;
-  valor: number = 0;
+  valor: string = "";
   extraruta: string = "";
-  //tipo: string = "";
   longitud: string = "";
   latitud: string = "";
   recaudo: number = 0;
   observacion: string = "";
   class: string = "";
-
+  zindex:string = "";
   tipo: string = "";
 
   type: string = "";

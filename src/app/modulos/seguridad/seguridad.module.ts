@@ -6,7 +6,7 @@ import { AdminUsuarioComponent } from "./paginas/admin-usuario/admin-usuario.com
 import { HomeComponent } from "./paginas/home/home.component";
 import { IndicadoresComponent } from "./paginas/home/componentes/indicadores/indicadores.component";
 import { LoginComponent } from "./componentes/login/login.component";
-import { SharedModule } from "../../shared/shared/shared.module";
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
   declarations: [AdminUsuarioComponent, HomeComponent, IndicadoresComponent,LoginComponent, HasPermissionDirective],

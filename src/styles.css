@@ -64,6 +64,7 @@ body {
   transform: translate(-50%, 0);
   transition: all 0.3s ease-out;
   width: 0;
+  z-index: 1;
 }
 
 .property .icon {
@@ -116,22 +117,19 @@ body {
   background-color: #FFFFFF;
   border-radius: 8px;
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
-  min-height: 155px;
+  min-height: 107px;
   padding: 15px 15px;
   width: 400px;
   word-break: break-all;
-  overflow-y: auto;
-  z-index: 1;
 }
 
 .number-icon{
     position: absolute;
     color: black;
     font-size: 15px;
-    text-shadow: 1px 0px 3px;
 }
 .property.highlight .number-icon{
-  top: 100px;
+  top: 78px;
   color: #94999b;
 }
 .property.highlight::after {

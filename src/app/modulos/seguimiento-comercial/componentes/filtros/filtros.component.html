@@ -1,17 +1,17 @@
-<div [formGroup]="formFilter" class="grid grid-cols-3 gap-4">
+<div [formGroup]="formFilter" class="grid grid-cols-4 gap-4">
     <div>
         <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha</label>
-        <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        formControlName="fechaCorte"    
-        type="date" name="" id="">
+        <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            formControlName="fechaCorte" type="date" name="" id="">
     </div>
     <div>
         <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Supervisor</label>
         <select id="countries" formControlName="supervisor" (change)="obtenerVendedores()"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option value="" >Seleccione uno</option>
+            <option value="">Seleccione uno</option>
             @for (option of supervisores; track $index) {
-                <option [value]="option.id">{{option.nombre}}</option>
+            <option [value]="option.id">{{option.nombre}}</option>
             }
         </select>
     </div>
@@ -19,10 +19,15 @@
         <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Vendedor</label>
         <select id="countries" formControlName="vendedor" (change)="outPutData()"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option  value="">Seleccione uno</option>
+            <option value="">Seleccione uno</option>
             @for (option of vendedores; track $index) {
-                <option [value]="option.id">{{option.nombre}}</option>
+            <option [value]="option.id">{{option.nombre}}</option>
             }
         </select>
+    </div>
+    <div>
+        <br>
+        <button (click)="exportarComoCSV()" style="width: 100%;"
+            class="w-14 text-white bg-green-700 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Descargar</button>
     </div>
 </div>

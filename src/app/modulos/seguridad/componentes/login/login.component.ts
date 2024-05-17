@@ -21,8 +21,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private seguridadService: SeguridadService,
     private formBuilder: FormBuilder,
-    private route: Router,
-    private dialogRef: MatDialogRef<LoginComponent>
+    private route: Router
   ) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -51,10 +50,9 @@ export class LoginComponent implements OnInit {
             'permissions',
             JSON.stringify(loginData.data.permissions)
           );
-          this.store.startSessionUser(true);
+          this.store.startSessionUser(true,loginData.data.user);
           if (!this.isModal) {
-            this.route.navigate(['seguridad/home']);
-            this.dialogRef.close()
+            window.location.href='seguimientocomercial/tat';
           }
         }
       },

@@ -3,7 +3,7 @@
     <map-polyline [path]="vertices" [options]="polylineOptions" />
     @for (item of properties; track item;let index = $index) {
     <map-advanced-marker 
-    [content]="buildContent(item,index+1)" 
+    [content]="buildContent(item)" 
     title="{{item.fecha}}"
     #markerElem="mapAdvancedMarker"
     (mapClick)="toggleHighlight(index);"
@@ -11,15 +11,19 @@
     }
   </google-map>
 </div>
-<div class="p-4">
-  <seguimeinto-comercial-filtros (dataOut)="obtenerSeguientoVendedor($event)"></seguimeinto-comercial-filtros>
+<div class="grid grid-cols-1 gap-4">
+  <div class="p-4">
+    <seguimeinto-comercial-filtros (dataOut)="obtenerSeguientoVendedor($event)" [dataExport]="exportData"></seguimeinto-comercial-filtros>
+  </div>
+
 </div>
+
 <div class="p4">
   <div>
     <table mat-table [dataSource]="seguimientosVendedor">
-      <ng-container matColumnDef="numeroOrden">
-        <th mat-header-cell *matHeaderCellDef> Número orden </th>
-        <td mat-cell *matCellDef="let ubicacion"> {{ubicacion.numeroOrden}} </td>
+      <ng-container matColumnDef="orden">
+        <th mat-header-cell *matHeaderCellDef> Orden </th>
+        <td mat-cell *matCellDef="let ubicacion"> {{ubicacion.orden}} </td>
       </ng-container>
 
       <ng-container matColumnDef="fecha">
@@ -35,6 +39,11 @@
       <ng-container matColumnDef="cliente">
         <th mat-header-cell *matHeaderCellDef> Nombre cliente </th>
         <td mat-cell *matCellDef="let ubicacion"> {{ubicacion.nombreCliente}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="direccion">
+        <th mat-header-cell *matHeaderCellDef> Dirección </th>
+        <td mat-cell *matCellDef="let ubicacion"> {{ubicacion.direccion}} </td>
       </ng-container>
 
       <ng-container matColumnDef="novedad">

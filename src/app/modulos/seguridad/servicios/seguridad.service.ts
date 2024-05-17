@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import * as enviroment from '../../../../assets/enviroments/enviroment.json';
 import {
@@ -8,12 +8,15 @@ import {
 } from '../modelos/seguridad.model';
 import { Observable } from 'rxjs';
 import { ResponseAPI } from '../../../core/models/app/app.model';
+import { AppStore } from '../../../core/store/app.store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SeguridadService {
-  constructor(private route: Router, private http: HttpClient) {}
+
+  private LOGIN_URL="seguridad/login"
+  constructor( private http: HttpClient) {}
 
   loginUser(
     loginUser: RequestLoginUser
@@ -39,7 +42,7 @@ export class SeguridadService {
     let jwt = localStorage.getItem('token');
     let jwtArray = jwt?.split('.') ?? [];
     if (jwtArray.length <= 0) {
-      this.route.navigate(['']);
+      location.href = this.LOGIN_URL;
     }
 
     let payload = atob(jwtArray[1]);
@@ -49,5 +52,27 @@ export class SeguridadService {
         'http://schemas.microsoft.com/ws/2008/06/identity/claims/userdata'
       ]
     ).permissions.split(',');
+  }
+
+  getUserLogin(){
+    let jwt = localStorage.getItem('token');
+    console.log("hola");
+    let jwtArray = jwt?.split('.') ?? [];
+    if (jwtArray.length <= 0) {
+      return;
+    }
+
+    let payload = atob(jwtArray[1]);
+
+    return JSON.parse(
+      JSON.parse(payload)[
+        'http://schemas.microsoft.com/ws/2008/06/identity/claims/userdata'
+      ]
+    ).User
+  }
+
+  cerrarSession(){
+    localStorage.clear()
+    location.href = this.LOGIN_URL;
   }
 }

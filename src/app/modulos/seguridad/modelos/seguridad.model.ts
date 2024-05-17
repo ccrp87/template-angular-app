@@ -22,11 +22,11 @@ export interface Jwt {
   refreshToken: string;
 }
 
-export interface User {
-  userName: string;
-  email: string;
-  firstName: string;
-  lastName: string;
+export class User {
+  userName?: string="";
+  email?: string="";
+  FirstName?: string="";
+  LastName?: string="";
 }
 
 export interface Permission {

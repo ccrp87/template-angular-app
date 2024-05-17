@@ -1,5 +1,5 @@
 export class SeguimientoVendedorModel {
-  numeroOrden:string="";
+  orden:number=0;
   fecha: string = "";
   nombreCliente: string = "";
   codigoCliente:string=""
@@ -16,7 +16,7 @@ export class SeguimientoVendedorModel {
   class: string = "";
   zindex:string = "";
   tipo: string = "";
-
+  direccion:string="";
   type: string = "";
 
   position: google.maps.LatLngLiteral = { lat: 0, lng: 0 };

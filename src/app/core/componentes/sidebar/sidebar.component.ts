@@ -12,7 +12,7 @@ export class SidebarComponent implements OnInit {
 
   constructor() {
     effect(()=>{
-     this.visible = this.store.loginUser();
+     this.visible = this.store.isLoginUser();
     });
   }
 

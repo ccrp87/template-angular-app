@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { formatDate } from "@angular/common";
 import { SeguimientoTatService } from "../../servicios/seguimiento-tat.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { ExportFileService } from "../../../../core/services/utils/export-file.service";
 
 @Component({
   selector: "seguimeinto-comercial-filtros",
@@ -12,6 +13,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class FiltrosComponent implements OnInit {
   @Output() dataOut = new EventEmitter<any>();
+  @Input() dataExport:any[]=[];
   public formFilter!: FormGroup;
   public supervisores: SelectModel[] = [];
   public vendedores: SelectModel[] = [];
@@ -19,7 +21,8 @@ export class FiltrosComponent implements OnInit {
   constructor(
     private filterFormBuilder: FormBuilder,
     private seguimientoService: SeguimientoTatService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private fileExporter: ExportFileService
   ) {}
 
   ngOnInit(): void {
@@ -60,7 +63,12 @@ export class FiltrosComponent implements OnInit {
       this.formFilter.patchValue({ vendedor: "" });
     });
   }
-
+  exportarComoCSV() {
+    this.fileExporter.exportToCsv(
+      this.dataExport,
+      `seguimiento ${Date.now().toPrecision()}`
+    );
+  }
   outPutData() {
     this.dataOut.emit(this.formFilter.value);
   }

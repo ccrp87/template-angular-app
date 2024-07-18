@@ -1,17 +1,16 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
 
+import { HttpClientModule, provideHttpClient, withInterceptors } from "@angular/common/http";
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { SeguridadModule } from "./modulos/seguridad/seguridad.module";
 import { CoreModule } from "./core/core.module";
-import { HttpClientModule, provideHttpClient, withInterceptors } from "@angular/common/http";
 import { httpRequestAuthorizationInterceptor } from "./core/interceptors/http-request-authorization.interceptor";
-import { httpRequestLoadingInterceptor } from "./core/interceptors/http-request-loading.interceptor";
-import { BrowserModule } from "@angular/platform-browser";
-import { SharedModule } from "./shared/shared.module";
 import { httpRequestHandlerErrorsInterceptor } from "./core/interceptors/http-request-handler-api-errors.interceptor";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { SeguimientoComercialModule } from "./modulos/seguimiento-comercial/seguimiento-comercial.module";
+import { httpRequestLoadingInterceptor } from "./core/interceptors/http-request-loading.interceptor";
+import { SeguridadModule } from "./modules/seguridad/seguridad.module";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,8 +21,7 @@ import { SeguimientoComercialModule } from "./modulos/seguimiento-comercial/segu
     CoreModule,
     HttpClientModule,
     SharedModule,
-    BrowserAnimationsModule,
-    SeguimientoComercialModule
+    BrowserAnimationsModule
   ],
   providers: [
     provideHttpClient(
@@ -37,4 +35,4 @@ import { SeguimientoComercialModule } from "./modulos/seguimiento-comercial/segu
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule {}
+export class AppModule { }

@@ -3,7 +3,6 @@ import { inject } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { catchError, throwError } from "rxjs";
-import { LoginComponent } from "../../modulos/seguridad/componentes/login/login.component";
 
 export const httpRequestHandlerErrorsInterceptor: HttpInterceptorFn = (req, next) => {
   const snackBar = inject(MatSnackBar);
@@ -34,11 +33,6 @@ export const httpRequestHandlerErrorsInterceptor: HttpInterceptorFn = (req, next
           });
           break;
       }
-
-      /*  let dialogRef =  dialog.open(LoginComponent);
-      let instance = dialogRef.componentInstance;
-      instance.isModal = true;
-      */
 
       if (err.status >= 500) {
         // Handle 5xx HTTP error codes

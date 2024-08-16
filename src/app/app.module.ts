@@ -11,6 +11,7 @@ import { httpRequestHandlerErrorsInterceptor } from "./core/interceptors/http-re
 import { httpRequestLoadingInterceptor } from "./core/interceptors/http-request-loading.interceptor";
 import { SeguridadModule } from "./modules/seguridad/seguridad.module";
 import { SharedModule } from "./shared/shared.module";
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { SharedModule } from "./shared/shared.module";
     CoreModule,
     HttpClientModule,
     SharedModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-fussion' }),
     BrowserAnimationsModule
   ],
   providers: [

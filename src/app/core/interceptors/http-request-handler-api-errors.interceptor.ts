@@ -1,12 +1,10 @@
 import { HttpErrorResponse, HttpInterceptorFn } from "@angular/common/http";
 import { inject } from "@angular/core";
-import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { catchError, throwError } from "rxjs";
 
 export const httpRequestHandlerErrorsInterceptor: HttpInterceptorFn = (req, next) => {
   const snackBar = inject(MatSnackBar);
-  const dialog = inject(MatDialog);
 
   return next(req).pipe(
     catchError((err: HttpErrorResponse) => {

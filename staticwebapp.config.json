@@ -4,6 +4,15 @@
       "route": "/*",
       "serve": "/index.html",
       "statusCode": 200
+    },
+    {
+      "route": "home",
+      "methods": [
+        "get"
+      ]
+    },
+    {
+      "route": "seguridad"
     }
   ]
 }

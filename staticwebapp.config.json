@@ -1,15 +1,6 @@
 {
   "routes": [
     {
-      "route": "home",
-      "methods": [
-        "get"
-      ]
-    },
-    {
-      "route": "seguridad"
-    },
-    {
       "route": "/*",
       "serve": "/index.html",
       "statusCode": 200

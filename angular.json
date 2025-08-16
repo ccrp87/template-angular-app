@@ -91,7 +91,8 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
-              "src/favicon.ico",
+              "src/favicon.ico",  
+              "src/staticwebapp.config.json",
               "src/assets"
             ],
             "styles": [
